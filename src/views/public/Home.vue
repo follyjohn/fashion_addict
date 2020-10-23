@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div id="nav">
-      <nav class="navbar navbar-expand-lg navbar-light  p-4">
-        <a class="navbar-brand" href="#">fashion adict</a>
+      <nav class="navbar navbar-expand-lg navbar-light mx-4  p-4">
+        <a class="navbar-brand text-uppercase" href="#">fashion addict</a>
         <button
           type="button"
           id="sidebarCollapse"
@@ -18,6 +18,33 @@
         </ul>
       </nav>
     </div>
+    <div id="header-container">
+      <header>
+        <div>
+          <b-carousel
+            id="carousel-fade"
+            style="text-shadow: 0px 0px 2px #000"
+            fade
+            indicators
+            img-width="1024"
+            img-height="480"
+          >
+            <b-carousel-slide
+              caption="First slide"
+              img-src="https://picsum.photos/1024/480/?image=10"
+            ></b-carousel-slide>
+            <b-carousel-slide
+              caption="Second Slide"
+              img-src="https://picsum.photos/1024/480/?image=12"
+            ></b-carousel-slide>
+            <b-carousel-slide
+              caption="Third Slide"
+              img-src="https://picsum.photos/1024/480/?image=22"
+            ></b-carousel-slide>
+          </b-carousel>
+        </div>
+      </header>
+    </div>
   </div>
 </template>
 
@@ -32,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 #sidebarCollapse {
-  width: 40px;
+  width: 30px;
   height: 40px;
   cursor: pointer;
 }
@@ -68,5 +95,11 @@ export default {
   transform: none;
   opacity: 1;
   margin: 5px auto;
+}
+
+#header-container {
+  header {
+    margin-left: 16.5rem;
+  }
 }
 </style>

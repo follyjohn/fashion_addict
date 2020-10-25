@@ -5,6 +5,7 @@ import Login from "../views/admin/Login.vue";
 // import Register from "../views/admin/Register.vue";
 import firebase from "firebase";
 import Dashboard from "../views/admin/Dashboard.vue";
+import Djourag from "../views/admin/Djourag.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,14 @@ const routes = [
     path: "/admin/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/admin/djourag",
+    name: "Djourag",
+    component: Djourag,
     meta: {
       requiresAuth: true
     }

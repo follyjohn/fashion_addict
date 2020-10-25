@@ -8,6 +8,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import * as firebase from "firebase";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -18,6 +19,19 @@ library.add(faSearch);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDz8LYA6Mc6BX4DA6Xvzjjk3vi3K9AdiXM",
+  authDomain: "fashionaddict.firebaseapp.com",
+  databaseURL: "https://fashionaddict.firebaseio.com",
+  projectId: "fashionaddict",
+  storageBucket: "fashionaddict.appspot.com",
+  messagingSenderId: "781812968482",
+  appId: "1:781812968482:web:9d687a87ddc8bf189f2e7b",
+  measurementId: "G-6KH4NR48B4"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 new Vue({
   router,

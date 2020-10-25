@@ -2,7 +2,7 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100 p-l-55 p-r-55 p-t-55 p-b-50">
-        <form class="login100-form validate-form">
+        <form @submit.prevent="userLogin" class="login100-form validate-form">
           <span class="login100-form-title p-b-33">
             Connexion
           </span>
@@ -14,7 +14,7 @@
             <input
               class="input100"
               type="text"
-              name="email"
+              v-model="user.email"
               placeholder="Email"
             />
             <span class="focus-input100-1"></span>
@@ -28,7 +28,7 @@
             <input
               class="input100"
               type="password"
-              name="pass"
+              v-model="user.password"
               placeholder="Password"
             />
             <span class="focus-input100-1"></span>
@@ -36,7 +36,7 @@
           </div>
 
           <div class="container-login100-form-btn m-t-20">
-            <button class="login100-form-btn">
+            <button type="submit" class="login100-form-btn">
               Se connecter
             </button>
           </div>
@@ -64,7 +64,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(() => {
-          this.$router.push("/home");
+          this.$router.push("/admin/dashboard");
         })
         .catch(error => {
           alert(error.message);

@@ -9,7 +9,12 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import * as firebase from "firebase";
-
+import CoreuiVue from "@coreui/vue";
+// Registering single directives
+import { CEmitRootEvent } from "@coreui/vue";
+Vue.use(CoreuiVue);
+// globally
+Vue.directive("c-emit-root-event", CEmitRootEvent);
 // Install BootstrapVue
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin

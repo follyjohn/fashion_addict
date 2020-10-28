@@ -1,47 +1,69 @@
 <template>
   <div>
-    <CNavbar expandable="md" type="dark" color="info">
-      <CToggler in-navbar @click="collapsed = !collapsed" />
-      <CNavbarBrand href="#">NavBar</CNavbarBrand>
-      <CCollapse :show="collapsed" navbar>
-        <CNavbarNav>
-          <CNavItem href="#">Link</CNavItem>
-          <CNavItem href="#" disabled>Disabled</CNavItem>
-        </CNavbarNav>
-
-        <!-- Right aligned nav items -->
-        <CNavbarNav class="ml-auto">
-          <CForm inline>
-            <CInput class="mr-sm-2" placeholder="Search" size="sm" />
-            <CButton
-              color="secondary"
-              size="sm"
-              class="my-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </CButton>
-          </CForm>
-
-          <CDropdown togglerText="Lang" nav placement="bottom-end">
-            <CDropdownItem>EN</CDropdownItem>
-            <CDropdownItem>ES</CDropdownItem>
-            <CDropdownItem>RU</CDropdownItem>
-            <CDropdownItem>FA</CDropdownItem>
-          </CDropdown>
-
-          <CDropdown nav togglerText="User" placement="bottom-end">
-            <CDropdownItem>Profile</CDropdownItem>
-            <CDropdownItem>Signout</CDropdownItem>
-          </CDropdown>
-        </CNavbarNav>
-      </CCollapse>
-    </CNavbar>
+    <Navbar></Navbar>
+    <div class="container">
+      <div class="row justify-content-center">
+        <CButton
+          @click="warningModal = true"
+          color="primary"
+          class="ml-auto mt-4"
+        >
+          + Nouveau djourag
+        </CButton>
+      </div>
+      <div class="my-4"></div>
+      <CModal title="Ajouter un Djourag" color="info" :show.sync="warningModal">
+        <div>
+          <CRow>
+            <CCol sm="12">
+              <CInput label="Name" placeholder="Enter your name" />
+            </CCol>
+          </CRow>
+          <CRow>
+            <CCol sm="12">
+              <CInput
+                label="Credit Card Number"
+                placeholder="0000 0000 0000 0000"
+              />
+            </CCol>
+          </CRow>
+          <CRow>
+            <CCol sm="4">
+              <CSelect
+                label="Month"
+                :options="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+              />
+            </CCol>
+            <CCol sm="4">
+              <CSelect
+                label="Year"
+                :options="[
+                  2014,
+                  2015,
+                  2016,
+                  2017,
+                  2018,
+                  2019,
+                  2020,
+                  2021,
+                  2022,
+                  2023,
+                  2024,
+                  2025
+                ]"
+              />
+            </CCol>
+            <CCol sm="4">
+              <CInput label="CVV/CVC" placeholder="123" />
+            </CCol>
+          </CRow>
+        </div>
+      </CModal>
+    </div>
     <CCardBody>
       <CDataTable
         :items="items"
         :fields="fields"
-        column-filter
         table-filter
         items-per-page-select
         :items-per-page="5"
@@ -96,35 +118,214 @@
 </template>
 
 <script>
-import firebase from "firebase";
+// import firebase from "firebase";
+import Navbar from "../../components/admin/Navbar.vue";
+const items = [
+  {
+    username: "Samppa Nori",
+    registered: "2012/01/01",
+    role: "Member",
+    status: "Active"
+  },
+  {
+    username: "Estavan Lykos",
+    registered: "2012/02/01",
+    role: "Staff",
+    status: "Banned"
+  },
+  {
+    username: "Chetan Mohamed",
+    registered: "2012/02/01",
+    role: "Admin",
+    status: "Inactive"
+  },
+  {
+    username: "Derick Maximinus",
+    registered: "2012/03/01",
+    role: "Member",
+    status: "Pending"
+  },
+  {
+    username: "Friderik Dávid",
+    registered: "2012/01/21",
+    role: "Staff",
+    status: "Active"
+  },
+  {
+    username: "Yiorgos Avraamu",
+    registered: "2012/01/01",
+    role: "Member",
+    status: "Active"
+  },
+  {
+    username: "Avram Tarasios",
+    registered: "2012/02/01",
+    role: "Staff",
+    status: "Banned",
+    _classes: "table-success"
+  },
+  {
+    username: "Quintin Ed",
+    registered: "2012/02/01",
+    role: "Admin",
+    status: "Inactive"
+  },
+  {
+    username: "Enéas Kwadwo",
+    registered: "2012/03/01",
+    role: "Member",
+    status: "Pending"
+  },
+  {
+    username: "Agapetus Tadeáš",
+    registered: "2012/01/21",
+    role: "Staff",
+    status: "Active"
+  },
+  {
+    username: "Carwyn Fachtna",
+    registered: "2012/01/01",
+    role: "Member",
+    status: "Active",
+    _classes: "table-info"
+  },
+  {
+    username: "Nehemiah Tatius",
+    registered: "2012/02/01",
+    role: "Staff",
+    status: "Banned"
+  },
+  {
+    username: "Ebbe Gemariah",
+    registered: "2012/02/01",
+    role: "Admin",
+    status: "Inactive"
+  },
+  {
+    username: "Eustorgios Amulius",
+    registered: "2012/03/01",
+    role: "Member",
+    status: "Pending"
+  },
+  {
+    username: "Leopold Gáspár",
+    registered: "2012/01/21",
+    role: "Staff",
+    status: "Active"
+  },
+  {
+    username: "Pompeius René",
+    registered: "2012/01/01",
+    role: "Member",
+    status: "Active"
+  },
+  {
+    username: "Paĉjo Jadon",
+    registered: "2012/02/01",
+    role: "Staff",
+    status: "Banned"
+  },
+  {
+    username: "Micheal Mercurius",
+    registered: "2012/02/01",
+    role: "Admin",
+    status: "Inactive"
+  },
+  {
+    username: "Ganesha Dubhghall",
+    registered: "2012/03/01",
+    role: "Member",
+    status: "Pending"
+  },
+  {
+    username: "Hiroto Šimun",
+    registered: "2012/01/21",
+    role: "Staff",
+    status: "Active"
+  },
+  {
+    username: "Vishnu Serghei",
+    registered: "2012/01/01",
+    role: "Member",
+    status: "Active"
+  },
+  {
+    username: "Zbyněk Phoibos",
+    registered: "2012/02/01",
+    role: "Staff",
+    status: "Banned"
+  },
+  {
+    username: "Einar Randall",
+    registered: "2012/02/01",
+    role: "Admin",
+    status: "Inactive",
+    _classes: "table-danger"
+  },
+  {
+    username: "Félix Troels",
+    registered: "2012/03/21",
+    role: "Staff",
+    status: "Active"
+  },
+  {
+    username: "Aulus Agmundr",
+    registered: "2012/01/01",
+    role: "Member",
+    status: "Pending"
+  }
+];
+
+const fields = [
+  { key: "username", _style: "min-width:200px" },
+  "registered",
+  { key: "role", _style: "min-width:100px;" },
+  { key: "status", _style: "min-width:100px;" },
+  {
+    key: "show_details",
+    label: "",
+    _style: "width:1%",
+    sorter: false,
+    filter: false
+  }
+];
 
 export default {
+  components: {
+    Navbar
+  },
   data() {
     return {
+      items: items.map((item, id) => {
+        return { ...item, id };
+      }),
+      fields,
       details: [],
       collapseDuration: 0,
-      collapsed: false
+      warningModal: false
     };
   },
-  created() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.user = user;
-      } else {
-        this.user = null;
-      }
-    });
-  },
   methods: {
-    logOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          firebase.auth().onAuthStateChanged(() => {
-            this.$router.push("/admin/login");
-          });
-        });
+    getBadge(status) {
+      switch (status) {
+        case "Active":
+          return "success";
+        case "Inactive":
+          return "secondary";
+        case "Pending":
+          return "warning";
+        case "Banned":
+          return "danger";
+        default:
+          "primary";
+      }
+    },
+    toggleDetails(item) {
+      this.$set(this.items[item.id], "_toggled", !item._toggled);
+      this.collapseDuration = 300;
+      this.$nextTick(() => {
+        this.collapseDuration = 0;
+      });
     }
   }
 };

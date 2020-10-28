@@ -6,6 +6,7 @@ import Login from "../views/admin/Login.vue";
 import firebase from "firebase";
 import Dashboard from "../views/admin/Dashboard.vue";
 import Djourag from "../views/admin/Djourag.vue";
+import CategorieDjourag from "../views/admin/CategorieDjourag.vue";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,14 @@ const routes = [
     path: "/admin/djourag",
     name: "Djourag",
     component: Djourag,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/admin/categorie-djourag",
+    name: "CategorieDjourag",
+    component: CategorieDjourag,
     meta: {
       requiresAuth: true
     }
